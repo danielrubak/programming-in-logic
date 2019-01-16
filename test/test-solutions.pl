@@ -31,3 +31,22 @@ zakres(Stop, Stop, [Stop]).
 zakres(Start, Stop, [Start|RL]) :-
    Start1 is Start + 1,
    zakres(Start1, Stop, RL).
+
+% ------------------------------------------------ %
+
+:- op(300, xfy, w).
+
+w(walentina, irina).
+w(natasza, katarina).
+w(katarina, olga).
+w(swietlana, walentina).
+
+ludmila w swietlana.
+oksana w radmila.
+
+wewnetrzna(LalkaA, LalkaB) :-
+   LalkaA w LalkaB.
+
+wewnetrzna(LalkaA, LalkaB) :-
+   LalkaA w LalkaC,
+   wewnetrzna(LalkaC, LalkaB).
