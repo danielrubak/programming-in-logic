@@ -131,6 +131,69 @@ wspolne_pokolenie(X,Y) :-
 % -----           THIRD GROUP 2019           ----- %
 % ------------------------------------------------ %
 
+usun_ostatni([_], []).
+
+usun_ostatni([H|T], [H|T2]) :-
+    usun_ostatni(T,T2).
+
+usun_pierwszy([_|T], T).
+
+obetnij_liste(Lista, KrotszaLista) :-
+    usun_ostatni(Lista, T),
+    usun_pierwszy(T, KrotszaLista).
+
+dlugosc([],0).
+
+dlugosc([_|T], L) :-
+    dlugosc(T, X),
+    L is X + 1.
+
+sklej([],X,X).
+sklej([X|L1],L2,[X|L3]) :-
+    sklej(L1,L2,L3).
+
+podziel(List, Len2, List1, List2) :-
+    sklej(List1, List2, List),
+    dlugosc(List2, Len2).
+
+% Drugi sposob ale nie wolno go stosowac
+podziel1(L, I, F, B) :-
+   length(B,I),
+   append(F,B,L).
+
+% budynek(Nazwa, Miasto, Wysokość, Rok Budowy).
+budynki([
+    budynek('Pałac Kultury i Nauki', 'Warszawa', 237, 1955),
+    budynek('Warsaw Spire', 'Warszawa', 220, 2015),
+    budynek('Sky Tower', 'Wrocław', 212, 2012),
+    budynek('Warsaw Trade Tower', 'Warszawa', 208, 1999),
+    budynek('Złota 44', 'Warszawa', 192, 2013),
+    budynek('Rondo 1', 'Warszawa', 192, 2006),
+    budynek('Hotel Marriott', 'Warszawa', 170, 1989),
+    budynek('Warsaw Financial Center', 'Warszawa', 165, 1998),
+    budynek('InterContinental Warsaw', 'Warszawa', 164, 2004),
+    budynek('Cosmopolitan Twarda 2/4', 'Warszawa', 160, 2013)
+]).
+
+:- op(200, xfy, jest_nizszy).
+
+budynek(_,_,H1,_) jest_nizszy budynek(_,_,H2,_) :-
+    H1 < H2.
+
+najnizszy([A], A).
+
+najnizszy([budynek(_,_,H1,_)|T], budynek(A,B,H2,C)) :-
+   najnizszy(T, budynek(A,B,H2,C)),
+   H2 < H1.
+
+najnizszy([budynek(A,B,H1,C)|T], budynek(A,B,H1,C)) :-
+   najnizszy(T, budynek(_,_,H2,_)),
+   H2 > H1.
+
+% ------------------------------------------------ %
+% -----           FOURTH GROUP 2019          ----- %
+% ------------------------------------------------ %
+
 % ------------------------------------------------ %
 % -----           FIFTH GROUP 2019           ----- %
 % ------------------------------------------------ %
@@ -172,3 +235,7 @@ polaczenie(MiastoA, MiastoB, Visited) :-
     \+ member(MiastoC, Visited),
     polaczenie(MiastoC, MiastoB, [MiastoC|Visited]),
     MiastoA \= MiastoB.
+
+% ------------------------------------------------ %
+% -----           SIXTH GROUP 2019           ----- %
+% ------------------------------------------------ %
