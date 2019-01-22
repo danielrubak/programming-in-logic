@@ -1,4 +1,6 @@
 % ------------------------------------------------ %
+% -----             RANDOM  TEST             ----- %
+% ------------------------------------------------ %
 
 umiesc(Element, List, 0, [Element|List]).
 
@@ -7,15 +9,7 @@ umiesc(Element, [E|List], Position, [E|RL]):-
     umiesc(Element, List, Pos1, RL).
 
 % ------------------------------------------------ %
-
-zakres(Stop, Stop, [Stop]).
-
-zakres(Start, Stop, [Start|RL]) :-
-   Start1 is Start + 1,
-   zakres(Start1, Stop, RL).
-
-% ------------------------------------------------ %
-% -----              FIRST GROUP             ----- %
+% -----            FIRST GROUP 2019          ----- %
 % ------------------------------------------------ %
 
 dodaj_jeden([],[]).
@@ -71,3 +65,68 @@ rozmiar_grupy(Lalka, Rozmiar) :-
     zewn(Lalka,D),
     wewn(Lalka,C),
     Rozmiar is D + C + 1.
+
+% ------------------------------------------------ %
+% -----          SECOND GROUP 2019           ----- %
+% ------------------------------------------------ %
+
+zakres(Stop, Stop, [Stop]).
+
+zakres(Start, Stop, [Start|RL]) :-
+   Start1 is Start + 1,
+   zakres(Start1, Stop, RL).
+
+dziel_na_pol(L, A, B) :-
+	append(A, B, L),
+	length(A, N),
+	length(B, N).
+
+takie_same([], []).
+
+takie_same([H1|R1], [H2|R2]) :-
+	H1 = H2,
+	takie_same(R1, R2).
+
+podwojna(X) :-
+	dziel_na_pol(X,A,B),
+	takie_same(A,B).
+
+:- op(50,xf,jest_kobieta).
+:- op(50,xf,jest_mezczyzna).
+
+jest_kobieta(X) :-
+	kobieta(X).
+
+jest_mezczyzna(X) :-
+	mezczyzna(X).
+
+rodzic(X,Y) :- dziecko(Y,X).
+matka(X,Y) :- rodzic(X,Y), kobieta(X).
+ojciec(X,Y) :- rodzic(X,Y), mezczyzna(X).
+przodek(X,Y) :- rodzic(X,Y).
+przodek(X,Z) :- rodzic(X,Y), przodek(Y,Z).
+potomek(X,Y) :- rodzic(Y,X).
+potomek(Z,X) :- rodzic(Y,Z), potomek(Y,X).
+dziadkowie(X,Y) :- rodzic(X,Z), rodzic(Z,Y).
+dziadek(X,Y) :- dziadkowie(X,Y),mezczyzna(X).
+babcia(X,Y) :- dziadkowie(X,Y), kobieta(X).
+pradziadkowie(X,Y) :- dziadkowie(X,Z), rodzic(Z,Y).
+
+wspolne_pokolenie(X,Y) :-
+	rodzic(P,X),
+	rodzic(P,Y),
+	X \= Y.
+
+wspolne_pokolenie(X,Y) :-
+	dziadkowie(P,X),
+	dziadkowie(P,Y),
+	X \= Y.
+
+wspolne_pokolenie(X,Y) :-
+	pradziadkowie(P,X),
+	pradziadkowie(P,Y),
+	X \= Y.
+
+% ------------------------------------------------ %
+% -----           THIRD GROUP 2019           ----- %
+% ------------------------------------------------ %
