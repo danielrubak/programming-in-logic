@@ -130,3 +130,45 @@ wspolne_pokolenie(X,Y) :-
 % ------------------------------------------------ %
 % -----           THIRD GROUP 2019           ----- %
 % ------------------------------------------------ %
+
+% ------------------------------------------------ %
+% -----           FIFTH GROUP 2019           ----- %
+% ------------------------------------------------ %
+
+znajdz_element([Elem|_], 1, Elem).
+
+znajdz_element([_|List], K, Elem) :-
+   K > 1,
+   K1 is K - 1,
+   znajdz_element(List, K1, Elem).
+
+podziel(List,0,[],List).
+
+podziel([X|Xs],N,[X|Ys],Zs) :-
+   N > 0,
+   N1 is N - 1,
+   podziel(Xs,N1,Ys,Zs).
+
+% bezposredniDo(MiastoPoczatkowe, MiastoKoncowe)
+bezposredniDo(warszawa, krakow).
+bezposredniDo(warszawa, gdansk).
+bezposredniDo(warszawa, lodz).
+bezposredniDo(katowice, krakow).
+bezposredniDo(katowice, poznan).
+
+:- op(300,xfy,bezposredniDo).
+
+szczecin bezposredniDo swinoujscie.
+rzeszow bezposredniDo krakow.
+
+bezposredni(MiastoA, MiastoB) :- bezposredniDo(MiastoA, MiastoB) ; bezposredniDo(MiastoB, MiastoA).
+
+polaczenie(MiastoA, MiastoB) :- polaczenie(MiastoA, MiastoB, []).
+
+polaczenie(MiastoA, MiastoB, _) :- bezposredni(MiastoA, MiastoB).
+
+polaczenie(MiastoA, MiastoB, Visited) :-
+    bezposredni(MiastoA, MiastoC),
+    \+ member(MiastoC, Visited),
+    polaczenie(MiastoC, MiastoB, [MiastoC|Visited]),
+    MiastoA \= MiastoB.
