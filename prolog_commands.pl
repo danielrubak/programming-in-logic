@@ -1,33 +1,34 @@
-%% Włączenie powłoki:
-%% swipl
+%% Enabling the shell:
+swipl
 
-%% Wyłączenie powłoki:
+%% Disabling the shell:
 halt.
 
-%% W Prologu każda linia musi się kończyć kropką!
+%% Each line must end with a dot!
 
-%% Wczytywanie pliku:
-[nazwa_pliku].
+%% Loading a file
+[file].
+%% If file name consists of more than one word or contains white characters it should be placed in 'file_name'
+['file_name'].
 
-%% Średnik powoduje przeskakiwanie do kolejnej znalezionej odpowiedzi.
+%% Using a semicolon causes jumping to the next found solution/answer
 
-%% _ - tym symbolem zaznacza się szukaną anonimową
+%% _ - this symbol is marked by the anonymous search
 
-%% Predykat write wypisuje term na wyjście, np. write('Ala ma kota') wypisze w konsoli napis 'Ala ma kota'.
+%% The 'write' predicate writes a term to the output, eg write('Ala has a cat') will write 'Ala ma kota' on the console.
 
-%% Predykat 'nl' przechodzi do nowej linii.
+%% The 'nl' predicate goes to a new line.
 
-%%
-%% Predykaty assert/a/z /1, retract/a/z /1 pozwalają na dodawanie, usuwanie faktów do/z bazy wiedzy, na/do jej początku/końca.
+%% The 'assert/a/z /1', 'retract/a/z /1' predicates allow to add/remove facts to/from the knowledge base, at its beginning or to its end.
 
-%% Predykat abolish/1 pozwala usunąć predykat z bazy wiedzy. (np. abolish(kobieta/1).)
+%% The 'abolish/1' predicate allows to remove predicate from the knowledge base, eq abolish(woman/1).
 
-%% Predykat retractall/1 pozwala usunąć klauzule danego predykatu z bazy wiedzy. (np. retractall(kobieta(K)).)
+%% The 'retractall/1' predicate allows to remove the clauses of a given predicate from the knowledge base, eq retractall(woman(K)).
 
-%% Predykaty see/n, tell/told pozwalają na odczyt, zapis bazy wiedzy z/do pliku.
+%% The 'see/n', 'tell/told' predicates allot to load/save knowledge base from/to file.
 
-%% Uruchomienie programu ze wskazanego pliku (plik.pl) z poziomu systemu operacyjnego można zrealizować za pomocą:
-swipl -s program.pl -g go -t halt
+%% Starting the program from the indicated file (file.pl) from the operating system level can be implemented using:
+swipl -s file.pl -g go -t halt
 
 %% Correct way of writing equations arithmetic:
 X is 2 + 2.
