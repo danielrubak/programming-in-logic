@@ -194,6 +194,66 @@ najnizszy([budynek(A,B,H1,C)|T], budynek(A,B,H1,C)) :-
 % -----           FOURTH GROUP 2019          ----- %
 % ------------------------------------------------ %
 
+znajdz_przedostatni([H|[_|[]]], H).
+
+znajdz_przedostatni([_|T], Elem) :-
+   znajdz_przedostatni(T,Elem).
+
+podziel([L], [L], []) :-
+	M is L mod 2,
+	M < 1.
+
+podziel([L], [], [L]) :-
+	M is L mod 2,
+	M > 0.
+
+podziel([H|T], [H|TD], TU) :-
+	M is H mod 2,
+	M < 1,
+	podziel(T,TD,TU).
+
+podziel([H|T], TD, [H|TU]) :-
+   M is H mod 2,
+	M > 0,
+	podziel(T,TD,TU).
+
+osoba(olgierd, 'Olgierd', 'Jarzyna'), m, wydarzenie('Kraków', data(16, 7, 1993)) - brak).
+osoba(onufry, 'Onufry', 'Jarzyna', m, wydarzenie('Kraków', data(8, 3, 2012)) - brak).
+osoba(marianna, 'Marianna', 'Jarzyna', k, wydarzenie('Kraków', data(11, 3, 1994)) - brak).
+osoba(zygmunt, 'Zygmunt', 'Jarzyna', m, wydarzenie('Wieliczka', data(1, 1, 1963)) - wydarzenie('Kraków', data(23, 1, 1994))).
+osoba(honorata, 'Honorata', 'Jarzyna', k, wydarzenie('Skała', data(13, 7, 1955)) - wydarzenie('Skała', data(2, 8, 1997))).
+
+wczesniejsza(data(_,_,Y), data(_,_,YY)) :-
+	Y < YY.
+wczesniejsza(data(_,M,Y), data(_,MM,YY)) :-
+	Y = YY,
+	M < MM.
+
+wczesniejsza(data(D,M,Y), data(DD,MM,YY)) :-
+	Y = YY,
+	M = MM,
+	D < DD.
+
+spotkaly_sie(IDOsoba1, IDOsoba2) :-
+	osoba(IDOsoba1, _,_,_, _ - brak),
+	osoba(IDOsoba2, _,_,_, _ - brak).
+
+spotkaly_sie(IDOsoba1, IDOsoba2) :-
+	osoba(IDOsoba1, _,_,_, _ - wydarzenie(_,DS)),
+	osoba(IDOsoba2, _,_,_, wydarzenie(_, DU) - brak),
+	wczesniejsza(DU, DS).
+
+spotkaly_sie(IDOsoba1, IDOsoba2) :-
+	osoba(IDOsoba2, _,_,_, _ - wydarzenie(_,DS)),
+	osoba(IDOsoba1, _,_,_, wydarzenie(_, DU) - brak),
+	wczesniejsza(DU, DS).
+
+spotkaly_sie(IDOsoba1, IDOsoba2) :-
+	osoba(IDOsoba1, _,_,_, wydarzenie(_,DU1) - wydarzenie(_,DS1)),
+	osoba(IDOsoba2, _,_,_, wydarzenie(_, DU2) - wydarzenie(_,DS2)),
+	wczesniejsza(DU1, DS2),
+	wczesniejsza(DU2, DS1).
+
 % ------------------------------------------------ %
 % -----           FIFTH GROUP 2019           ----- %
 % ------------------------------------------------ %
