@@ -289,3 +289,29 @@ polaczenie(MiastoA, MiastoB, Visited) :-
 % ------------------------------------------------ %
 % -----           SIXTH GROUP 2019           ----- %
 % ------------------------------------------------ %
+
+umiesc(Element, List, 0, [Element|List]).
+
+umiesc(Element, [E|List], Position, [E|RL]):-
+    Pos1 is Position-1,
+    umiesc(Element, List, Pos1, RL).
+
+podwoj_elementy([], []).
+
+podwoj_elementy([H|T], [H,H|Y]) :-
+    podwoj_elementy(T, Y).
+
+to_samo_miejsce(osoba(_, _, _, _, wydarzenie(X,_)-wydarzenie(X,_))).
+
+lista_osob_to_samo_miejsce([],[]).
+
+lista_osob_to_samo_miejsce([Y], [Y]) :-
+    to_samo_miejsce(Y).
+
+lista_osob_to_samo_miejsce([X|H], [X|T]):-
+    to_samo_miejsce(X),
+    lista_osob_to_samo_miejsce(H, T).
+
+lista_osob_to_samo_miejsce([X|H], L):-
+    \+ to_samo_miejsce(X),
+    lista_osob_to_samo_miejsce(H, L).

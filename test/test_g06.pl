@@ -47,7 +47,7 @@ osoby([
 % ?- to_samo_miejsce(osoba(honorata, 'Honorata', 'Jarzyna', k, wydarzenie('Skała', data(13, 7, 1955)) - wydarzenie('Skała', data(2, 8, 1997))))
 % True
 
-%to_samo_miejsce(Osoba) :- fail.
+to_samo_miejsce(osoba(_, _, _, _, wydarzenie(X,_)-wydarzenie(X,_))).
 
 % (b) [10 pkt]
 % Wykorzystując powyższy, napisz predykat, który dla danej listy osób
@@ -56,4 +56,15 @@ osoby([
 % ?- lista_osob_to_samo_miejsce(osoby, Szukane).
 % Szukane = [osoba(honorata, ...)]
 
-%lista_osob_to_samo_miejsce(ListaOsob, ZnalezioneOsoby) :- fail.
+lista_osob_to_samo_miejsce([],[]).
+
+lista_osob_to_samo_miejsce([Y], [Y]) :-
+    to_samo_miejsce(Y).
+
+lista_osob_to_samo_miejsce([X|H], [X|T]):-
+    to_samo_miejsce(X),
+    lista_osob_to_samo_miejsce(H, T).
+
+lista_osob_to_samo_miejsce([X|H], L):-
+    \+ to_samo_miejsce(X),
+    lista_osob_to_samo_miejsce(H, L).
