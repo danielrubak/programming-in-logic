@@ -6,3 +6,7 @@ https://kalabovi.org/pitel:flp:99pl?fbclid=IwAR1ZVjQxHQKF7JPtTk5UbR7oBqLXespdpeR
 
 You can find tasks description on the website:
 https://sites.google.com/site/prologsite/prolog-problems
+
+
+Solutions for tasks of 'random_examples' dictionary were taken from website:
+https://ai.ia.agh.edu.pl/wiki/pl:prolog:pllib:start
