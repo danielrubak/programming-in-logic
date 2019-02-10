@@ -1,10 +1,9 @@
-
-
 /*
-	mylength(Xs,N) :- The list Xs has N elements.
+mylength(Xs, N) :-
+	The list Xs has N elements.
 */
 
-	mylength([],0).
-	mylength([X|Xs],s(N)) :- mylength(Xs,N).
+mylength([], 0).
 
-%	Program 3.17: Determining the length of a list
+mylength([X|Xs], s(N)) :-
+	mylength(Xs, N).
