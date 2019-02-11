@@ -1,3 +1,7 @@
+/*
+
+*/
+
 naive_reverse([],[]).
 naive_reverse([H|T],Rev):-
   naive_reverse(T,TR),

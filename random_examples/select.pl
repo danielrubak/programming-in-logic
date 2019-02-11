@@ -1,10 +1,9 @@
-/*		
-	select(X,HasXs,OneLessXs) :- 
-		The list OneLessXs is the result of removing one 
-		occurrence of X from the list HasXs.
+/*
+select(X, HasXs, OneLessXs) :-
+	The list OneLessXs is the result of removing one occurrence of X from the list HasXs.
 */
 
-	select(X,[X|Xs],Xs).
-	select(X,[Y|Ys],[Y|Zs]) :- select(X,Ys,Zs).
+select(X, [X|Xs], Xs).
 
-%	Program 3.19: Selecting an element from a list
+select(X, [Y|Ys], [Y|Zs]) :-
+	select(X, Ys, Zs).
