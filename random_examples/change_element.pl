@@ -1,5 +1,6 @@
 /*
-
+change_element(X, L1, Y, L2) :-
+    change all occurrences of element X in L1 to Y and save result to L2
 */
 
 change_element(_, [], _, []).

@@ -1,14 +1,15 @@
 /*
-
+get_element(X, L2, Index) :-
+    find element X on list L2 and set his position to Index
 */
 
-znajdz(_, [], _) :-
+get_element(_, [], _) :-
     !,
     fail.
 
-znajdz(1, [X|_], X) :-
+get_element(1, [X|_], X) :-
     !.
 
-znajdz(N, [_|O], X) :-
+get_element(N, [_|O], X) :-
     M is N-1,
-    znajdz(M, O, X).
+    get_element(M, O, X).
